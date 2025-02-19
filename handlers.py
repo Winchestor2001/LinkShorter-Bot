@@ -5,6 +5,7 @@ from aiogram.enums import ChatType
 
 router = Router()
 
+# https://cutt.ly
 KEYWORDS = {
     "Gamma♻️": "https://cutt.ly/JrwFGuLV",
     "Daddy♻️": "https://cutt.ly/3rwFGk4S",
