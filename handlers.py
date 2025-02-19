@@ -34,8 +34,11 @@ KEYWORDS = {
 
 @router.message(F.chat.type.in_([ChatType.GROUP, ChatType.SUPERGROUP]))
 async def keyword_handler(message: Message):
-    text = message.text.lower()
+    try:
+        text = message.text.lower()
 
-    best_match, score, key = process.extractOne(text, KEYWORDS.keys(), scorer=fuzz.partial_ratio)
-    if score >= 80:
-        await message.reply(f"🎰 <b>{best_match}</b>: {KEYWORDS[best_match]}")
+        best_match, score, key = process.extractOne(text, KEYWORDS.keys(), scorer=fuzz.partial_ratio)
+        if score >= 50:
+            await message.reply(f"🎰 <b>{best_match}</b>: {KEYWORDS[best_match]}")
+    except Exception as e:
+        logging.exception(e)
