@@ -1,0 +1,24 @@
+from fastapi import FastAPI, HTTPException
+from starlette.requests import Request
+from starlette.responses import RedirectResponse
+
+from link_service.database import Database
+from link_service.schemas import URLRequest
+
+app = FastAPI()
+db = Database()
+
+
+@app.post("/shorten")
+def shorten_url(request: URLRequest):
+    short_code = db.create_short_url(str(request.url))
+    return {"short_url": f"https://dizel.site/{short_code}"}
+
+
+@app.get("/{short_code}")
+def redirect(short_code: str):
+    original_url = db.get_original_url(short_code)
+    if original_url:
+        return RedirectResponse(url=original_url)
+    else:
+        raise HTTPException(status_code=404, detail="Ссылка не найдена")
