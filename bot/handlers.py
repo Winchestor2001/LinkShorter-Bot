@@ -65,11 +65,17 @@ async def keyword_handler(message: Message):
     try:
         text = message.text.lower()
 
+        found_key = None
         for word in text.split():
             if word in WORD_TO_KEY:
-                key = WORD_TO_KEY[word]
-                await message.reply(f"🎰 <b>{word}</b>: {LINKS[key]}")
-                return
+                found_key = WORD_TO_KEY[word]
+                break
+
+        if found_key:
+            short_code = db.create_short_url(LINKS[found_key])
+            link = f"https://dizel.site/{short_code}"
+            await message.reply(f"🎰 <b>{found_key}</b>: {link}")
+            return
 
         best_match, score, key = process.extractOne(text, list(WORD_TO_KEY.keys()), scorer=fuzz.partial_ratio)
 
