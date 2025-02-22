@@ -1,7 +1,7 @@
 import sqlite3
 import shortuuid
 
-DB_PATH = "database.db"
+DB_PATH = "../database.db"
 
 
 class Database:
