@@ -72,17 +72,15 @@ async def keyword_handler(message: Message):
                 break
 
         if found_key:
-            short_code = db.create_short_url(LINKS[found_key])
-            link = f"https://dizel.site/{short_code}"
+            link = f"https://dizel.site/{found_key.lower()}"
             await message.reply(f"🎰 <b>{found_key}</b>: {link}")
             return
 
         best_match, score, key = process.extractOne(text, list(WORD_TO_KEY.keys()), scorer=fuzz.partial_ratio)
 
-        if score >= 69:
+        if score >= 70:
             matched_key = WORD_TO_KEY[best_match]
-            short_code = db.create_short_url(LINKS[matched_key])
-            link = f"https://dizel.site/{short_code}"
+            link = f"https://dizel.site/{matched_key.lower()}"
             await message.reply(f"🎰 <b>{best_match}</b>: {link}")
 
     except Exception as e:
