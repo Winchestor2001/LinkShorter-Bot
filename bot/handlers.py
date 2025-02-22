@@ -4,7 +4,10 @@ from aiogram.types import Message
 from aiogram.enums import ChatType
 from rapidfuzz import process, fuzz
 
+from link_service.database import Database
+
 router = Router()
+db = Database()
 
 KEYWORDS = {
     "Gamma": ["Gamma", "Гамма"],
@@ -17,7 +20,7 @@ KEYWORDS = {
 }
 
 LINKS = {
-    "Gamma": "https://cutt.ly/JrwFGuLV",
+    "Gamma": "https://cleellbert.com/s6bdfa796",
     "Daddy": "https://cutt.ly/3rwFGk4S",
     "R7": "https://cutt.ly/WrwFGmIF",
     "Kent": "https://cutt.ly/frwFGIgw",
@@ -44,7 +47,9 @@ async def keyword_handler(message: Message):
 
         if score >= 69:
             matched_key = WORD_TO_KEY[best_match]
-            await message.reply(f"🎰 <b>{best_match}</b>: {LINKS[matched_key]}")
+            short_code = db.create_short_url(LINKS[matched_key])
+            link = f"https://dizel.site/{short_code}"
+            await message.reply(f"🎰 <b>{best_match}</b>: {link}")
 
     except Exception as e:
         logging.exception(e)
