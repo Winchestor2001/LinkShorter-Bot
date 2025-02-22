@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from starlette.responses import RedirectResponse
 
-from .database import Database
-from .schemas import URLRequest
+from database import Database
+from schemas import URLRequest
 
 app = FastAPI()
 db = Database()
