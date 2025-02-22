@@ -4,7 +4,7 @@ from aiogram.types import Message
 from aiogram.enums import ChatType
 from rapidfuzz import process, fuzz
 
-from link_service.database import Database
+from database import Database
 
 router = Router()
 db = Database()

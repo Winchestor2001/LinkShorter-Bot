@@ -1,8 +1,7 @@
 from fastapi import FastAPI, HTTPException
-from starlette.requests import Request
 from starlette.responses import RedirectResponse
 
-from link_service.database import Database
+from database import Database
 from link_service.schemas import URLRequest
 
 app = FastAPI()
