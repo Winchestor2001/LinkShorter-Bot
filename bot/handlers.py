@@ -41,7 +41,7 @@ LINKS = {
     "Arcada": "https://synthed-neonway.com/sa5612f78",
     "Catcasino": "https://catchthecatsix.com/s99591107",
     "Kometa": "https://spangle-flight.com/s7670a03a",
-    "Gizbo": "https://gizbo-way-six.com/c96b9b693",
+    "Gizbo": "https://gizbo-way-eight.com/c96b9b693",
     "Irwin": "https://rwn-irrs01.com/c7b6f58b9",
     "Lex": "https://lex-irrs01.com/c77fdd5b3",
     "1go": "https://1go-irrs01.com/cb7ac564e",
