@@ -1,22 +1,17 @@
 from fastapi import FastAPI, HTTPException
 from starlette.responses import RedirectResponse
 
-from .database import Database
-from .schemas import URLRequest
+from bot.handlers import LINKS, code_finder
 
 app = FastAPI()
-db = Database()
-
-
-@app.post("/shorten")
-def shorten_url(short_code: str, link: str):
-    short_code = db.create_short_url(link, short_code)
-    return {"short_url": f"https://dizel.site/{short_code}"}
-
 
 @app.get("/{short_code}")
-def redirect(short_code: str):
-    original_url = db.get_original_url(short_code)
+async def redirect(short_code: str):
+    """Редиректит на оригинальный URL"""
+    short_code = short_code.lower()  # Делаем ключ в нижнем регистре
+    context, link = await code_finder(short_code)
+    original_url = LINKS.get(context)
+
     if original_url:
         return RedirectResponse(url=original_url)
     else:

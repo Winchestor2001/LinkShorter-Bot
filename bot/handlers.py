@@ -4,10 +4,7 @@ from aiogram.types import Message
 from aiogram.enums import ChatType
 from rapidfuzz import process, fuzz
 
-from database import Database
-
 router = Router()
-db = Database()
 
 KEYWORDS = {
     "Gamma": ["Gamma", "Гамма"],
@@ -57,47 +54,36 @@ LINKS = {
     "Rox": "https://rox-fwuocypyjf.com/c161a9e18",
 }
 
-WORD_TO_KEY = {word.lower(): key for key, words in KEYWORDS.items() for word in words}
+
+async def code_finder(text: str):
+    WORD_TO_KEY = {word.lower(): key for key, words in KEYWORDS.items() for word in words}
+    found_key = None
+    for word in text.split():
+        if word in WORD_TO_KEY:
+            found_key = WORD_TO_KEY[word]
+            break  # Найдено - выходим из цикла
+
+    if found_key:  # Если нашли точное слово
+        short_code = found_key.lower()
+        link = f"https://dizel.site/{short_code}"
+        return found_key, link
+
+    # 2️⃣ Если точного совпадения нет, используем fuzzy matching
+    best_match, score, key = process.extractOne(text, list(WORD_TO_KEY.keys()), scorer=fuzz.partial_ratio)
+
+    if score >= 70:  # Учитываем только точность выше 70%
+        matched_key = WORD_TO_KEY[best_match]
+        short_code = matched_key.lower()
+        link = f"https://dizel.site/{short_code}"
+        return best_match, link
 
 
 @router.message(F.chat.type.in_([ChatType.GROUP, ChatType.SUPERGROUP]))
 async def keyword_handler(message: Message):
     try:
         text = message.text.lower()
-
-        # 1️⃣ Проверяем точное совпадение в `WORD_TO_KEY`
-        found_key = None
-        for word in text.split():
-            if word in WORD_TO_KEY:
-                found_key = WORD_TO_KEY[word]
-                break
-
-        if found_key:
-            short_code = found_key.lower()
-            existing_link = db.get_original_url(short_code)
-            if existing_link:
-                link = f"https://dizel.site/{short_code}"
-            else:
-                db.create_short_url(LINKS[found_key], short_code)
-                link = f"https://dizel.site/{short_code}"
-
-            await message.reply(f"🎰 <b>{found_key}</b>: {link}")
-            return
-
-        # 2️⃣ Если точного совпадения нет, ищем похожее слово
-        best_match, score, key = process.extractOne(text, list(WORD_TO_KEY.keys()), scorer=fuzz.partial_ratio)
-
-        if score >= 70:
-            matched_key = WORD_TO_KEY[best_match]
-            short_code = matched_key.lower()
-            existing_link = db.get_original_url(short_code)
-            if existing_link:
-                link = f"https://dizel.site/{short_code}"
-            else:
-                db.create_short_url(LINKS[matched_key], short_code)
-                link = f"https://dizel.site/{short_code}"
-
-            await message.reply(f"🎰 <b>{best_match}</b>: {link}")
+        context, link = await code_finder(text)
+        await message.reply(f"🎰 <b>{context}</b>: {link}")
 
     except Exception as e:
         logging.exception(e)
