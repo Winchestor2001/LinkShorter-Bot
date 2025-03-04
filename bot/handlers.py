@@ -63,8 +63,9 @@ WORD_TO_KEY = {word.lower(): key for key, words in KEYWORDS.items() for word in 
 @router.message(F.chat.type.in_([ChatType.GROUP, ChatType.SUPERGROUP]))
 async def keyword_handler(message: Message):
     try:
-        text = message.text
+        text = message.text.lower()
 
+        # 1️⃣ Проверяем точное совпадение в `WORD_TO_KEY`
         found_key = None
         for word in text.split():
             if word in WORD_TO_KEY:
@@ -72,15 +73,32 @@ async def keyword_handler(message: Message):
                 break
 
         if found_key:
-            link = f"https://dizel.site/{found_key.lower()}"
+            short_code = found_key.lower()
+            existing_link = db.get_original_url(short_code)
+
+            if existing_link:
+                link = f"https://dizel.site/{short_code}"
+            else:
+                db.create_short_url(LINKS[found_key], short_code)
+                link = f"https://dizel.site/{short_code}"
+
             await message.reply(f"🎰 <b>{found_key}</b>: {link}")
             return
 
+        # 2️⃣ Если точного совпадения нет, ищем похожее слово
         best_match, score, key = process.extractOne(text, list(WORD_TO_KEY.keys()), scorer=fuzz.partial_ratio)
 
         if score >= 70:
             matched_key = WORD_TO_KEY[best_match]
-            link = f"https://dizel.site/{matched_key.lower()}"
+            short_code = matched_key.lower()
+            existing_link = db.get_original_url(short_code)
+
+            if existing_link:
+                link = f"https://dizel.site/{short_code}"
+            else:
+                db.create_short_url(LINKS[matched_key], short_code)
+                link = f"https://dizel.site/{short_code}"
+
             await message.reply(f"🎰 <b>{best_match}</b>: {link}")
 
     except Exception as e:

@@ -29,8 +29,8 @@ class Database:
             result = cursor.fetchone()
         return result[0] if result else None
 
-    def create_short_url(self, original_url: str) -> str:
-        """Создаёт короткую ссылку или возвращает существующую"""
+    def create_short_url(self, original_url: str, short_code: str) -> str:
+        """Создаёт короткую ссылку с названием из WORD_TO_KEY"""
         with sqlite3.connect(DB_PATH) as conn:
             cursor = conn.cursor()
 
@@ -40,8 +40,7 @@ class Database:
             if existing:
                 return existing[0]
 
-            # Генерируем новый короткий код
-            short_code = shortuuid.uuid()[:6]
+            # Записываем короткую ссылку в БД
             cursor.execute("INSERT INTO links (short, original) VALUES (?, ?)", (short_code, original_url))
             conn.commit()
             return short_code
