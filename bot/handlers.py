@@ -63,7 +63,7 @@ WORD_TO_KEY = {word.lower(): key for key, words in KEYWORDS.items() for word in 
 @router.message(F.chat.type.in_([ChatType.GROUP, ChatType.SUPERGROUP]))
 async def keyword_handler(message: Message):
     try:
-        text = message.text.lower()
+        text = message.text
 
         found_key = None
         for word in text.split():
