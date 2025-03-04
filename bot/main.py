@@ -9,8 +9,8 @@ db = Database()
 
 
 @app.post("/shorten")
-def shorten_url(request: URLRequest):
-    short_code = db.create_short_url(str(request.url))
+def shorten_url(short_code: str, link: str):
+    short_code = db.create_short_url(link, short_code)
     return {"short_url": f"https://dizel.site/{short_code}"}
 
 

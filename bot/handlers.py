@@ -75,7 +75,6 @@ async def keyword_handler(message: Message):
         if found_key:
             short_code = found_key.lower()
             existing_link = db.get_original_url(short_code)
-
             if existing_link:
                 link = f"https://dizel.site/{short_code}"
             else:
@@ -92,7 +91,6 @@ async def keyword_handler(message: Message):
             matched_key = WORD_TO_KEY[best_match]
             short_code = matched_key.lower()
             existing_link = db.get_original_url(short_code)
-
             if existing_link:
                 link = f"https://dizel.site/{short_code}"
             else:
