@@ -28,6 +28,7 @@ KEYWORDS = {
     "Sol": ["Sol", "Сол"],
     "Fresh": ["Fresh", "Фреш"],
     "Rox": ["Rox", "Рокс"],
+    "Flagman": ["Flagman", "Флагман"],
 }
 
 LINKS = {
@@ -52,6 +53,7 @@ LINKS = {
     "Sol": "https://sol-diamew02.com/c827e24aa",
     "Fresh": "https://fresh-sfgjhyrt02.com/cebba1ef0",
     "Rox": "https://rox-fwuocypyjf.com/c161a9e18",
+    "Flagman": "https://flagman-way-six.com/c18bf1d67",
 }
 
 
