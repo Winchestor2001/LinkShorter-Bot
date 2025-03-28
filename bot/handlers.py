@@ -30,6 +30,7 @@ KEYWORDS = {
     "Rox": ["Rox", "Рокс"],
     "Flagman": ["Flagman", "Флагман"],
     "Vavada": ["Vavada", "вавада"],
+    "Vodka": ["Vodka", "водка"],
 }
 
 LINKS = {
@@ -56,6 +57,7 @@ LINKS = {
     "Rox": "https://rox-fwuocypyjf.com/c161a9e18",
     "Flagman": "https://flagman-way-six.com/c18bf1d67",
     "Vavada": "https://partnervada.com/?promo=96c358a7-855a-4a86-9994-99a1d5fb7084&target=register",
+    "Vodka": "https://vodka2.xyz/?id=10915",
 }
 
 
