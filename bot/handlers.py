@@ -32,6 +32,7 @@ KEYWORDS = {
     "Vavada": ["Vavada", "вавада"],
     "Vodka": ["Vodka", "водка"],
     "Cactus": ["Cactus", "Кактус"],
+    "Dragon": ["Dragon", "Драгон"],
 }
 
 LINKS = {
@@ -60,6 +61,7 @@ LINKS = {
     "Vavada": "https://partnervada.com/?promo=96c358a7-855a-4a86-9994-99a1d5fb7084&target=register",
     "Vodka": "https://vodka2.xyz/?id=10915",
     "Cactus": "https://cactus-balances.com/affiliate/c_d9b0mfuo",
+    "Dragon": "https://dr8.to/xLd6Z",
 }
 
 
