@@ -36,13 +36,13 @@ KEYWORDS = {
 }
 
 LINKS = {
-    "Gamma": "https://cleellbert.com/s6bdfa796",
-    "Daddy": "https://nice-road-five.com/s1256a562",
+    "Gamma": "https://neerenicle-street.com/s6bdfa796",
+    "Daddy": "https://aeruborony.com/s1256a562",
     "R7": "https://aristocratic-hall.com/sfbca26e3",
-    "Kent": "https://passage-through-deserts.com/s4e7a50ec",
-    "Arcada": "https://synthed-neonway.com/sa5612f78",
+    "Kent": "https://pamuatinat.xyz/s4e7a50ec",
+    "Arcada": "https://grid-cyberlane.com/sa5612f78",
     "Catcasino": "https://catchthecatsix.com/s99591107",
-    "Kometa": "https://spangle-flight.com/s7670a03a",
+    "Kometa": "https://tropical-path.com/s7670a03a",
     "Gizbo": "https://gizbo-way-eight.com/c96b9b693",
     "Irwin": "https://rwn-irrs01.com/c7b6f58b9",
     "Lex": "https://lex-irrs01.com/c77fdd5b3",
