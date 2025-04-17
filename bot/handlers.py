@@ -33,6 +33,7 @@ KEYWORDS = {
     "Vodka": ["Vodka", "водка"],
     "Cactus": ["Cactus", "Кактус"],
     "Dragon": ["Dragon", "Драгон"],
+    "Stake": ["Stake", "Cтейк"],
 }
 
 LINKS = {
@@ -62,6 +63,7 @@ LINKS = {
     "Vodka": "https://vodka2.xyz/?id=10915",
     "Cactus": "https://cactus-balances.com/affiliate/c_d9b0mfuo",
     "Dragon": "https://dr8.to/xLd6Z",
+    "Stake": "https://stake.com/?c=WXLe0LPv",
 }
 
 
