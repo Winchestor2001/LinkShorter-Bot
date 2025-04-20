@@ -77,7 +77,7 @@ async def code_finder(text: str):
 
     if found_key:  # Если нашли точное слово
         short_code = found_key.lower()
-        link = f"https://dizel.site/{short_code}"
+        link = f"https://dizel.online/{short_code}"
         return found_key, link
 
     # 2️⃣ Если точного совпадения нет, используем fuzzy matching
@@ -86,7 +86,7 @@ async def code_finder(text: str):
     if score >= 70:  # Учитываем только точность выше 70%
         matched_key = WORD_TO_KEY[best_match]
         short_code = matched_key.lower()
-        link = f"https://dizel.site/{short_code}"
+        link = f"https://dizel.online/{short_code}"
         return best_match, link
 
 
