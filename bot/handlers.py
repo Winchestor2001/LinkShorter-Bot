@@ -34,6 +34,7 @@ KEYWORDS = {
     "Cactus": ["Cactus", "Кактус"],
     "Dragon": ["Dragon", "Драгон"],
     "Stake": ["Stake", "Cтейк"],
+    "Dbbet": ["Dbbet", "Дббет"],
 }
 
 LINKS = {
@@ -64,6 +65,7 @@ LINKS = {
     "Cactus": "https://cactus-balances.com/affiliate/c_d9b0mfuo",
     "Dragon": "https://dr8.to/xLd6Z",
     "Stake": "https://stake.com/?c=WXLe0LPv",
+    "Dbbet": "https://db-bet.co/42HX4yR",
 }
 
 
