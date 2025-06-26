@@ -1,4 +1,6 @@
 import logging
+import re
+
 from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.enums import ChatType
@@ -72,34 +74,34 @@ LINKS = {
 
 
 async def code_finder(text: str):
+    text = text.lower()
     WORD_TO_KEY = {word.lower(): key for key, words in KEYWORDS.items() for word in words}
     found_key = None
-    for word in text.split():
+    words = re.findall(r"\w+", text)
+
+    for word in words:
         if word in WORD_TO_KEY:
             found_key = WORD_TO_KEY[word]
-            break  # Найдено - выходим из цикла
+            break
 
-    if found_key:  # Если нашли точное слово
+    if found_key:
         short_code = found_key.lower()
         link = f"https://dizel.online/{short_code}"
         return found_key, link
 
-    # 2️⃣ Если точного совпадения нет, используем fuzzy matching
-    best_match, score, key = process.extractOne(text, list(WORD_TO_KEY.keys()), scorer=fuzz.partial_ratio)
-
-    if score >= 70:  # Учитываем только точность выше 70%
+    best_match, score, _ = process.extractOne(text, list(WORD_TO_KEY.keys()), scorer=fuzz.partial_ratio)
+    if score >= 70:
         matched_key = WORD_TO_KEY[best_match]
         short_code = matched_key.lower()
         link = f"https://dizel.online/{short_code}"
         return best_match, link
 
-
-@router.message(F.chat.type.in_([ChatType.GROUP, ChatType.SUPERGROUP]))
+@router.message(lambda msg: msg.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP])
 async def keyword_handler(message: Message):
     try:
-        text = message.text.lower()
-        context, link = await code_finder(text)
-        await message.reply(f"🎰 <b>{context}</b>: {link}")
-
+        result = await code_finder(message.text)
+        if result:
+            context, link = result
+            await message.reply(f"🎰 <b>{context}</b>: {link}")
     except Exception as e:
         logging.exception(e)
