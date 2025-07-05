@@ -69,7 +69,7 @@ LINKS = {
     "Dragon": "https://dr8.to/xLd6Z",
     "Stake": "https://stake.com/?c=WXLe0LPv",
     "Dbbet": "https://db-bet.co/42HX4yR",
-    "Martin": "https://megaways1.com/cfb58af13",
+    "Martin": "https://megaways4.com/cfb58af13",
 }
 
 
