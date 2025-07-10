@@ -38,6 +38,7 @@ KEYWORDS = {
     "Stake": ["Stake", "Cтейк"],
     "Dbbet": ["Dbbet", "Дббет"],
     "Martin": ["Martin", "Мартин"],
+    "Jvspinbet": ["Jvspinbet", "Жвспинбет"],
 }
 
 LINKS = {
@@ -70,6 +71,7 @@ LINKS = {
     "Stake": "https://stake.com/?c=WXLe0LPv",
     "Dbbet": "https://db-bet.co/42HX4yR",
     "Martin": "https://megaways4.com/cfb58af13",
+    "Jvspinbet": "https://jvsbet.com/L?tag=d_4546004m_34153c_&site=4546004&ad=34153",
 }
 
 
