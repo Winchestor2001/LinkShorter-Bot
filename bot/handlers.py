@@ -6,7 +6,7 @@ from aiogram.enums import ChatType
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from rapidfuzz import process, fuzz
 
-from bot.loader import load_links, ADMINS
+from bot.loader import load_links, ADMINS, DOMAIN
 
 router = Router()
 
@@ -30,13 +30,13 @@ async def code_finder(text: str):
     for word in words:
         if word in WORD_TO_KEY:
             matched_key = WORD_TO_KEY[word]
-            link = f"https://dizel.online/{matched_key.lower()}"
+            link = f"{DOMAIN}/{matched_key.lower()}"
             return matched_key, link
 
     best_match, score, _ = process.extractOne(text, list(WORD_TO_KEY.keys()), scorer=fuzz.partial_ratio)
     if score >= 70:
         matched_key = WORD_TO_KEY[best_match]
-        link = f"https://dizel.online/{matched_key.lower()}"
+        link = f"{DOMAIN}/{matched_key.lower()}"
         return matched_key, link
 
 
@@ -50,13 +50,13 @@ async def webapp_keyboard_handler(message: Message):
                 [
                     KeyboardButton(
                         text="🛠 Открыть панель",
-                        web_app=WebAppInfo(url="https://a346af5f1828.ngrok-free.app/webapp")
+                        web_app=WebAppInfo(url=f"{DOMAIN}/webapp")
                     )
                 ]
             ],
             resize_keyboard=True
         )
-    
+
         await message.answer("Добро пожаловать в панель управления 🔧", reply_markup=keyboard)
 
 
