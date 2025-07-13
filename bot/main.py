@@ -1,21 +1,19 @@
-from fastapi import FastAPI, HTTPException
-from starlette.responses import RedirectResponse
+from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 
-from bot.handlers import LINKS, code_finder
+from bot.routers import router, redirect_router
 
 app = FastAPI()
 
-@app.get("/{short_code}")
-async def redirect(short_code: str):
-    """Редиректит на оригинальный URL"""
-    try:
-        short_code = short_code.lower()  # Делаем ключ в нижнем регистре
-        context, link = await code_finder(short_code)
-        original_url = LINKS.get(context)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=e)
+# API роуты
+app.include_router(router)
+app.include_router(redirect_router)
 
-    if original_url:
-        return RedirectResponse(url=original_url)
-    else:
-        raise HTTPException(status_code=404, detail="Ссылка не найдена")
+
+app.add_middleware(
+        CORSMiddleware,  # noqa  
+        allow_origins="*",
+        allow_credentials=True,
+        allow_methods="*",
+        allow_headers="*",
+    )
